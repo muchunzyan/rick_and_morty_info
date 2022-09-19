@@ -139,8 +139,9 @@ class _CharactersPageState extends State<CharactersPage> {
   void onNavigationBtnPress(AsyncSnapshot snapshot, String direction) {
     setState(() {
       if (((direction == "prev")
-          ? snapshot.data!.prevPageLink
-          : snapshot.data!.nextPageLink) != "") {
+              ? snapshot.data!.prevPageLink
+              : snapshot.data!.nextPageLink) !=
+          "") {
         futureCharactersListWithInfo = fetchCharactersListWithInfo(
             (direction == "prev")
                 ? snapshot.data!.prevPageLink
