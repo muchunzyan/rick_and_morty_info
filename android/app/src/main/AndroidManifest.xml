@@ -2,7 +2,7 @@
     package="com.exe.cute.rick_and_morty_info">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="rick_and_morty_info"
+        android:label="Rick and Morty Info"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

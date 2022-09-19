@@ -37,7 +37,7 @@ class _EpisodesPageState extends State<EpisodesPage> {
                       onTap: () {},
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 2 / 3 - 24,
-                        height: MediaQuery.of(context).size.width * 1 / 5,
+                        height: MediaQuery.of(context).size.width * 1 / 4,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
