@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_info/characters_page.dart';
-import 'package:rick_and_morty_info/episodes_page.dart';
+import 'package:rick_and_morty_info/pages/characters_page.dart';
+import 'package:rick_and_morty_info/pages/episodes_page.dart';
 
-import 'locations_page.dart';
+import 'pages/locations_page.dart';
 
 void main() {
   runApp(const MyApp());

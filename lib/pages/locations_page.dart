@@ -37,7 +37,7 @@ class _LocationsPageState extends State<LocationsPage> {
                       onTap: () {},
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 2 / 3 - 24,
-                        height: MediaQuery.of(context).size.width * 1 / 4,
+                        height: MediaQuery.of(context).size.width * 1 / 5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
@@ -48,8 +48,6 @@ class _LocationsPageState extends State<LocationsPage> {
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                      "Status: ${snapshot.data!.results[index].name}"),
                                   Text(
                                       "Specie: ${snapshot.data!.results[index].type}"),
                                   Text(
