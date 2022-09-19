@@ -12,6 +12,8 @@ class CharactersPage extends StatefulWidget {
 class _CharactersPageState extends State<CharactersPage> {
   late Future<CharactersListWithInfo> futureCharactersListWithInfo;
 
+  final ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _CharactersPageState extends State<CharactersPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
+              controller: _controller,
               itemCount: snapshot.data!.results.length + 1,
               itemBuilder: (BuildContext context, int index) {
                 if (index < snapshot.data!.results.length) {
@@ -37,12 +40,16 @@ class _CharactersPageState extends State<CharactersPage> {
                           SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * 2 / 3 - 24,
+                            height:
+                                MediaQuery.of(context).size.width * 1 / 3 + 16,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 ListTile(
                                   title:
                                       Text(snapshot.data!.results[index].name),
+                                ),
+                                ListTile(
                                   subtitle: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -89,26 +96,34 @@ class _CharactersPageState extends State<CharactersPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: 40,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              onNavigationBtnPress(snapshot, "prev");
-                            },
-                            child: const Text("Prev page"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: 40,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              onNavigationBtnPress(snapshot, "next");
-                            },
-                            child: const Text("Next page"),
-                          ),
-                        ),
+                        (snapshot.data!.prevPageLink != "")
+                            ? SizedBox(
+                                width: (snapshot.data!.nextPageLink != "")
+                                    ? MediaQuery.of(context).size.width / 3
+                                    : MediaQuery.of(context).size.width - 16,
+                                height: 40,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    onNavigationBtnPress(snapshot, "prev");
+                                  },
+                                  child: const Text("Previous page"),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                        (snapshot.data!.nextPageLink != "")
+                            ? SizedBox(
+                                width: (snapshot.data!.prevPageLink != "")
+                                    ? MediaQuery.of(context).size.width / 3
+                                    : MediaQuery.of(context).size.width - 16,
+                                height: 40,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    onNavigationBtnPress(snapshot, "next");
+                                  },
+                                  child: const Text("Next page"),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     ),
                   );
@@ -148,5 +163,14 @@ class _CharactersPageState extends State<CharactersPage> {
                 : snapshot.data!.nextPageLink);
       }
     });
+    _scrollUp();
+  }
+
+  void _scrollUp() {
+    _controller.animateTo(
+      _controller.position.minScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 }
